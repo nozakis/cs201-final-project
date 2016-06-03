@@ -63,5 +63,7 @@ public interface BasicGraphADT<T> {
 	 * Clear all edges and vertices from the graph
 	 ********************/
 	public void clear();
+	
+	public void print();
 
 }
