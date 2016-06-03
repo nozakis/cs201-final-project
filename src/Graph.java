@@ -119,6 +119,12 @@ public class Graph<T> implements BasicGraphADT<T> {
 		this.edgeCount = 0;
 	}
 	
+	public void print() {
+		for(int i = 0; i < lbList.size(); i++) {
+			System.out.println(lbList.get(i));
+		}
+	}
+	
 	public static void main(String[] args) {
 		Graph<String> g = new Graph<String>();
 		g.addVertex("a");
