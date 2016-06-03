@@ -40,6 +40,8 @@ public class MazeGraph {
 
 		if(!weighted) {
 			BasicGraphADT<String> gmaze = loadMaze(fname);
+			System.out.println("loaded " + fname);
+			gmaze.print();
 			List<Vertex<String>> path1 = solveMazeDepthFirst(gmaze, startvertex, endvertex);
 			System.out.println("Solution using DFS:");
 			for(int i = 0; path1 != null && i < path1.size(); i++) {
@@ -56,7 +58,7 @@ public class MazeGraph {
 		} else {
 			WeightedGraphADT<String> gmaze = loadWeightedMaze(fname);
 			List<Vertex<String>> path3 = solveMaze(gmaze, startvertex, endvertex);
-			System.out.println("Solution with least weight:");
+			System.out.println("Sion with least weight:");
 			for(int i = 0; i < path3.size(); i++) {
 				System.out.println(path3.get(i));
 			}
@@ -67,9 +69,34 @@ public class MazeGraph {
 	 * This method loads a maze from a given file with name fname
 	 *********************/
 	public static BasicGraphADT<String> loadMaze(String fname) {
-		BasicGraphADT<String> mymaze = new Graph<String>(); 
-		// change this to initalize your graph from the given file
+		BasicGraphADT<String> mymaze = new Graph<String>();
+		Scanner input = null;
 
+		try {
+			input = new Scanner(new File(fname));
+		} catch(FileNotFoundException e) {
+			//If it can't open it, spit out an error
+			System.out.println("Unable to find file.");
+			System.exit(0);
+		}
+		
+		int size = Integer.parseInt(input.nextLine().split("")[0]);
+		String[] prevLine = null;
+		
+		while(input.hasNextLine()) {
+			String[] line = input.nextLine().split(" ");
+			for(int i = 0; i < line.length; i++) {
+				if(!line[i].endsWith("0")) {
+					mymaze.addVertex(line[i]);
+					if(prevLine != null && !prevLine[i].endsWith("0")) {
+						mymaze.addEdge(prevLine[i], line[i]);
+					}
+					if(i > 0 && !line[i - 1].endsWith("0")) {
+						mymaze.addEdge(line[i - 1], line[i]);
+					}
+				}
+			}
+		}
 		return mymaze;
 	}
 
@@ -78,7 +105,7 @@ public class MazeGraph {
 	 * a weighted graph
 	 *********************/
 	public static WeightedGraphADT<String> loadWeightedMaze(String fname) {
-		WeightedGraphADT<String> mymaze = null; // change this to initalize your graph
+		WeightedGraphADT<String> mymaze = null; // change this to initialize your graph
 		// build your maze based on the given file
 		return mymaze;
 	}
