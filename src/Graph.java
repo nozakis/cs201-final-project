@@ -3,13 +3,15 @@ import java.util.List;
 
 public class Graph<T> implements BasicGraphADT<T> {
 
-	private List<Vertex<T>> verts;
-	private List<Vertex<T>,Vertex<T>> edges;
+	private HashMap<Integer,Vertex<T>> verts;
+	//private List<Vertex<T>,Vertex<T>> edges;
 	private int vertCount;
 	private int edgeCount;
 
 	public Graph() {
-		this.count = 0;
+		this.verts = new HashMap<Integer,Vertex<T>>();
+		this.vertCount = 0;
+		this.edgeCount = 0;
 	}
 
 	/*******************
