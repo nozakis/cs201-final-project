@@ -1,17 +1,13 @@
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Graph<T> implements BasicGraphADT<T> {
 
-	private HashMap<Integer,Vertex<T>> verts;
-	//private List<Vertex<T>,Vertex<T>> edges;
-	private int vertCount;
-	private int edgeCount;
+	private HashMap<Integer,Vertex<T>> vertMap;
 
 	public Graph() {
-		this.verts = new HashMap<Integer,Vertex<T>>();
-		this.vertCount = 0;
-		this.edgeCount = 0;
+		this.vertMap = new HashMap<Integer,Vertex<T>>();
 	}
 
 	/*******************
@@ -19,7 +15,9 @@ public class Graph<T> implements BasicGraphADT<T> {
 	 * @return Whether the vertex was successfully added
 	 ********************/
 	public boolean addVertex(T vert) {
-		this.verts.add(vert);
+		Vertex<T> v = new Vertex<T>(vert);
+		this.vertMap.put(v.hashCode(), v);
+		return true;
 	}
 
 	/******************
@@ -27,7 +25,21 @@ public class Graph<T> implements BasicGraphADT<T> {
 	 * @return Whether the edge was successfully added
 	 ********************/
 	public boolean addEdge(T beg, T end) {
-		this.vert.add(beg, end);
+		List<Vertex<T>> vertList = (List<Vertex<T>>) vertMap.values();
+		List<T> lbList = new ArrayList<T>();
+		for(int i = 0; i < vertList.size(); i++) {
+			lbList.add(vertList.get(i).getLabel());
+		}
+		
+		if(!lbList.contains(beg) || !lbList.contains(end)) {
+			return false;
+		} else {
+			int begI = lbList.indexOf(beg);
+			int endI = lbList.indexOf(end);
+			vertList.get(begI).addNeighbor(vertList.get(endI));
+			vertList.get(endI).addNeighbor(vertList.get(begI));
+			return true;
+		}
 	}
 
 	/******************
