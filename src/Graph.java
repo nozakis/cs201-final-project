@@ -47,11 +47,17 @@ public class Graph<T> implements BasicGraphADT<T> {
 	 * @return Whether the vertex exists
 	 ********************/
 	public boolean hasVertex(T vert) {
-		for(int i = 0; i < this.vertCount; i++) {
-			if(this.verts.get(i).equals(vert)) {
-				return true;
-			}
+		List<Vertex<T>> vertList = (List<Vertex<T>>) vertMap.values();
+		List<T> lbList = new ArrayList<T>();
+		
+		for(int i = 0; i < vertList.size(); i++) {
+			lbList.add(vertList.get(i).getLabel());
 		}
+		
+		if(lbList.contains(vert)) {
+			return true;
+		}
+		
 		return false;
 	}
 
@@ -61,12 +67,25 @@ public class Graph<T> implements BasicGraphADT<T> {
 	 * @return Whether the edge exists
 	 ********************/
 	public boolean hasEdge(T beg, T end) {
-		for(int i = 0; i < this.edgeCount; i++) {
-			if(this.edges.get(i).equals()) {
+		List<Vertex<T>> vertList = (List<Vertex<T>>) vertMap.values();
+		List<T> lbList = new ArrayList<T>();
+		for(int i = 0; i < vertList.size(); i++) {
+			lbList.add(vertList.get(i).getLabel());
+		}
+		
+		if(!lbList.contains(beg) || !lbList.contains(end)) {
+			return false;
+		} else {
+			int begI = lbList.indexOf(beg);
+			int endI = lbList.indexOf(end);
+			List<Vertex<T>> begNeighbors = vertList.get(begI).getNeighbors();
+			List<Vertex<T>> endNeighbors = vertList.get(endI).getNeighbors();
+			if(!begNeighbors.contains(vertList.get(endI)) || !endNeighbors.contains(vertList.get(begI))) {
+				return false;
+			} else {
 				return true;
 			}
 		}
-		return false;
 	}
 
 
