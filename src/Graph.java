@@ -1,12 +1,23 @@
+import java.util.HashMap;
 import java.util.List;
 
 public class Graph<T> implements BasicGraphADT<T> {
+
+	private List<Vertex<T>> verts;
+	private List<Vertex<T>,Vertex<T>> edges;
+	private int vertCount;
+	private int edgeCount;
+
+	public Graph() {
+		this.count = 0;
+	}
+
 	/*******************
 	 * Add a vertex to this graph with given label
 	 * @return Whether the vertex was successfully added
 	 ********************/
 	public boolean addVertex(T vert) {
-		
+		this.verts.add(vert);
 	}
 
 	/******************
@@ -14,7 +25,7 @@ public class Graph<T> implements BasicGraphADT<T> {
 	 * @return Whether the edge was successfully added
 	 ********************/
 	public boolean addEdge(T beg, T end) {
-		
+		this.vert.add(beg, end);
 	}
 
 	/******************
@@ -22,23 +33,35 @@ public class Graph<T> implements BasicGraphADT<T> {
 	 * @return Whether the vertex exists
 	 ********************/
 	public boolean hasVertex(T vert) {
-		
+		for(int i = 0; i < this.vertCount; i++) {
+			if(this.verts.get(i).equals(vert)) {
+				return true;
+			}
+		}
+		return false;
 	}
+
 
 	/******************
 	 * Tests whether an edge exists in the graph
 	 * @return Whether the edge exists
 	 ********************/
 	public boolean hasEdge(T beg, T end) {
-		
+		for(int i = 0; i < this.edgeCount; i++) {
+			if(this.edges.get(i).equals()) {
+				return true;
+			}
+		}
+		return false;
 	}
+
 
 	/*****************
 	 * Gets a list containing all the neighbors of a given vertex
 	 * @return the neighbor list as a java List
 	 *********************/
 	public List<Vertex<T>> getNeighbors(T vert) {
-		
+
 	}
 
 	/****************************
@@ -46,7 +69,7 @@ public class Graph<T> implements BasicGraphADT<T> {
 	 * @return the vertex
 	 ************************/
 	public Vertex<T> getVertex(T lab) {
-		
+
 	}
 
 	/*****************
@@ -54,7 +77,7 @@ public class Graph<T> implements BasicGraphADT<T> {
 	 * @return Whether the graph is empty
 	 *******************/
 	public boolean isEmpty() {
-		
+
 	}
 
 	/********************
@@ -62,7 +85,7 @@ public class Graph<T> implements BasicGraphADT<T> {
 	 * @return The number of vertices
 	 *******************/
 	public int getNumVertices() {
-		
+
 	}
 
 	/********************
@@ -70,13 +93,13 @@ public class Graph<T> implements BasicGraphADT<T> {
 	 * @return The number of edges
 	 *********************/
 	public int getNumEdges() {
-		
+
 	}
 
 	/**************
 	 * Clear all edges and vertices from the graph
 	 ********************/
 	public void clear() {
-		
+
 	}
 }
