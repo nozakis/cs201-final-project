@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class WeightedGraph<T> implements WeightedGraphADT<T> {
+public class WeightedGraph<T> extends Graph<T> {
 	/*******************
 	 * Add a vertex to this graph with given label
 	 * @return Whether the vertex was successfully added
